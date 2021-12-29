@@ -1,0 +1,1 @@
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/eazyware/fish_fly/main/source_code'),true))()
