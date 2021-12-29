@@ -1,0 +1,383 @@
+local _workspace = game:GetService("Workspace")
+local players = game:GetService("Players")
+local userinputservice = game:GetService("UserInputService")
+
+local player = players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+	or character:FindFirstChildOfClass("Humanoid") 
+	or character:FindFirstChildOfClass("AnimationController")
+
+
+local animation_toggle = false
+
+local fish_fly = Instance.new("ScreenGui")
+local fish_fly_2 = Instance.new("Frame")
+local frame = Instance.new("ScrollingFrame")
+local toggle = Instance.new("Frame")
+local toggle_2 = Instance.new("ImageButton")
+local title = Instance.new("TextLabel")
+local round = Instance.new("UICorner")
+local description = Instance.new("TextLabel")
+local layout = Instance.new("UIListLayout")
+local speed = Instance.new("Frame")
+local description_2 = Instance.new("TextLabel")
+local input = Instance.new("TextBox")
+local round_2 = Instance.new("UICorner")
+local animations = Instance.new("Frame")
+local toggle_3 = Instance.new("ImageButton")
+local title_2 = Instance.new("TextLabel")
+local round_3 = Instance.new("UICorner")
+local description_3 = Instance.new("TextLabel")
+local title_3 = Instance.new("TextLabel")
+local minimize = Instance.new("ImageButton")
+local round_4 = Instance.new("UICorner")
+local title_4 = Instance.new("TextLabel")
+local aspect_ratio = Instance.new("UIAspectRatioConstraint")
+local shadow = Instance.new("Frame")
+
+--Properties:
+
+fish_fly.Name = "fish_fly"
+fish_fly.Parent = game:GetService("CoreGui") 
+	or game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+fish_fly_2.Name = "fish_fly"
+fish_fly_2.Parent = fish_fly
+fish_fly_2.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+fish_fly_2.BorderSizePixel = 0
+fish_fly_2.Position = UDim2.new(0, 0, 1, -200)
+fish_fly_2.Size = UDim2.new(0, 150, 0, 200)
+
+frame.Name = "frame"
+frame.Parent = fish_fly_2
+frame.Active = true
+frame.AnchorPoint = Vector2.new(0.5, 1)
+frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+frame.BackgroundTransparency = 1.000
+frame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+frame.BorderSizePixel = 0
+frame.Position = UDim2.new(0.5, 0, 1, 0)
+frame.Size = UDim2.new(1, 0, 1, -16)
+
+toggle.Name = "toggle"
+toggle.Parent = frame
+toggle.AnchorPoint = Vector2.new(0.5, 0)
+toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+toggle.BackgroundTransparency = 1.000
+toggle.Position = UDim2.new(0.5, 0, 0, 0)
+toggle.Size = UDim2.new(1, 0, 0, 90)
+
+toggle_2.Name = "toggle"
+toggle_2.Parent = toggle
+toggle_2.AnchorPoint = Vector2.new(0.5, 0)
+toggle_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+toggle_2.BorderSizePixel = 0
+toggle_2.Position = UDim2.new(0.5, 0, 0, 40)
+toggle_2.Size = UDim2.new(0.699999988, 0, 0, 45)
+toggle_2.AutoButtonColor = false
+
+title.Name = "title"
+title.Parent = toggle_2
+title.AnchorPoint = Vector2.new(0.5, 0.5)
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.Position = UDim2.new(0.5, 0, 0.5, 0)
+title.Size = UDim2.new(1, 0, 1, 0)
+title.Font = Enum.Font.SourceSansBold
+title.Text = "on"
+title.TextColor3 = Color3.fromRGB(56, 56, 56)
+title.TextScaled = true
+title.TextSize = 14.000
+title.TextWrapped = true
+
+round.CornerRadius = UDim.new(0, 3)
+round.Name = "round"
+round.Parent = toggle_2
+
+description.Name = "description"
+description.Parent = toggle
+description.AnchorPoint = Vector2.new(0.5, 0)
+description.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+description.BackgroundTransparency = 1.000
+description.Position = UDim2.new(0.5, 0, 0, 0)
+description.Size = UDim2.new(0.899999976, 0, 0, 34)
+description.Font = Enum.Font.SourceSans
+description.Text = "fish_fly is an alternative flying method that bypasses some certain anticheats."
+description.TextColor3 = Color3.fromRGB(255, 255, 255)
+description.TextScaled = true
+description.TextSize = 14.000
+description.TextTransparency = 0.540
+description.TextWrapped = true
+
+layout.Name = "layout"
+layout.Parent = frame
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+
+speed.Name = "speed"
+speed.Parent = frame
+speed.AnchorPoint = Vector2.new(0.5, 0)
+speed.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+speed.BackgroundTransparency = 1.000
+speed.Position = UDim2.new(0.5, 0, 0, 0)
+speed.Size = UDim2.new(1, 0, 0, 90)
+
+description_2.Name = "description"
+description_2.Parent = speed
+description_2.AnchorPoint = Vector2.new(0.5, 0)
+description_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+description_2.BackgroundTransparency = 1.000
+description_2.Position = UDim2.new(0.5, 0, 0, 0)
+description_2.Size = UDim2.new(0.899999976, 0, 0, 34)
+description_2.Font = Enum.Font.SourceSans
+description_2.Text = "the speed at which you fly around (default is 16)"
+description_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+description_2.TextScaled = true
+description_2.TextSize = 14.000
+description_2.TextTransparency = 0.540
+description_2.TextWrapped = true
+
+input.Name = "input"
+input.Parent = speed
+input.AnchorPoint = Vector2.new(0.5, 0)
+input.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+input.Position = UDim2.new(0.5, 0, 0, 40)
+input.Size = UDim2.new(0.699999988, 0, 0, 45)
+--input.AutoButtonColor = false
+input.Font = Enum.Font.SourceSansBold
+input.Text = "16"
+input.TextColor3 = Color3.fromRGB(56, 56, 56)
+input.TextScaled = true
+input.TextSize = 14.000
+input.TextWrapped = true
+
+round_2.CornerRadius = UDim.new(0, 3)
+round_2.Name = "round"
+round_2.Parent = input
+
+animations.Name = "animations"
+animations.Parent = frame
+animations.AnchorPoint = Vector2.new(0.5, 0)
+animations.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+animations.BackgroundTransparency = 1.000
+animations.Position = UDim2.new(0.5, 0, 0, 0)
+animations.Size = UDim2.new(1, 0, 0, 90)
+animations.Visible = false
+
+toggle_3.Name = "toggle"
+toggle_3.Parent = animations
+toggle_3.AnchorPoint = Vector2.new(0.5, 0)
+toggle_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+toggle_3.BorderSizePixel = 0
+toggle_3.Position = UDim2.new(0.5, 0, 0, 40)
+toggle_3.Size = UDim2.new(0.699999988, 0, 0, 45)
+toggle_3.AutoButtonColor = false
+
+title_2.Name = "title"
+title_2.Parent = toggle_3
+title_2.AnchorPoint = Vector2.new(0.5, 0.5)
+title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title_2.BackgroundTransparency = 1.000
+title_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+title_2.Size = UDim2.new(1, 0, 1, 0)
+title_2.Font = Enum.Font.SourceSansBold
+title_2.Text = "on"
+title_2.TextColor3 = Color3.fromRGB(56, 56, 56)
+title_2.TextScaled = true
+title_2.TextSize = 14.000
+title_2.TextWrapped = true
+
+round_3.CornerRadius = UDim.new(0, 3)
+round_3.Name = "round"
+round_3.Parent = toggle_3
+
+description_3.Name = "description"
+description_3.Parent = animations
+description_3.AnchorPoint = Vector2.new(0.5, 0)
+description_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+description_3.BackgroundTransparency = 1.000
+description_3.Position = UDim2.new(0.5, 0, 0, 0)
+description_3.Size = UDim2.new(0.899999976, 0, 0, 34)
+description_3.Font = Enum.Font.SourceSans
+description_3.Text = "toggle wether you want animations on or off"
+description_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+description_3.TextScaled = true
+description_3.TextSize = 14.000
+description_3.TextTransparency = 0.540
+description_3.TextWrapped = true
+
+title_3.Name = "title"
+title_3.Parent = fish_fly_2
+title_3.AnchorPoint = Vector2.new(0.5, 0)
+title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title_3.BackgroundTransparency = 1.000
+title_3.Position = UDim2.new(0.5, 0, 0, 0)
+title_3.Size = UDim2.new(1, 0, 0.0799999982, 0)
+title_3.Font = Enum.Font.SourceSansBold
+title_3.Text = "fish_fly"
+title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+title_3.TextScaled = true
+title_3.TextSize = 14.000
+title_3.TextWrapped = true
+title_3.TextYAlignment = Enum.TextYAlignment.Top
+
+minimize.Name = "minimize"
+minimize.Parent = fish_fly_2
+minimize.AnchorPoint = Vector2.new(1, 0)
+minimize.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+minimize.BorderSizePixel = 0
+minimize.Position = UDim2.new(1, 1, 0, -1)
+minimize.Size = UDim2.new(0, 17, 1, 0)
+minimize.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+minimize.ImageColor3 = Color3.fromRGB(255, 113, 88)
+
+round_4.CornerRadius = UDim.new(0, 3)
+round_4.Name = "round"
+round_4.Parent = minimize
+
+title_4.Name = "title"
+title_4.Parent = minimize
+title_4.AnchorPoint = Vector2.new(0.5, 0.5)
+title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title_4.BackgroundTransparency = 1.000
+title_4.Position = UDim2.new(0.5, 0, 0.400000006, 0)
+title_4.Size = UDim2.new(1.5, 0, 1.5, 0)
+title_4.Font = Enum.Font.SourceSansBold
+title_4.Text = "x"
+title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+title_4.TextScaled = true
+title_4.TextSize = 14.000
+title_4.TextWrapped = true
+
+aspect_ratio.Name = "aspect_ratio"
+aspect_ratio.Parent = minimize
+
+shadow.Name = "shadow"
+shadow.Parent = fish_fly_2
+shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+shadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+shadow.Size = UDim2.new(1, 10, 1, 10)
+shadow.ZIndex = -999999999
+shadow.Style = Enum.FrameStyle.DropShadow
+
+
+local function stop_animations()
+	for i,v in next, humanoid:GetPlayingAnimationTracks() do
+		v:Stop()
+	end
+end
+
+local function fly()
+	_workspace.Gravity = 0
+	local function died()
+		_workspace.Gravity = 196.2
+		fly_toggle = false
+	end
+	gravReset = humanoid.Died:Connect(died)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+	humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+	fly_toggle = true
+	
+	if not animation_toggle then
+		stop_animations()
+		humanoid.Changed:Connect(stop_animations)
+	end
+end
+
+local function unfly()
+	_workspace.Gravity = 196.2
+	fly_toggle = false
+	if gravReset then
+		gravReset:Disconnect()
+	end
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+	humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+	humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+end
+
+local mode = true
+local toggled = false
+local walkspeed = 16
+local function hide_gui()
+	fish_fly_2:TweenPosition(UDim2.new(0, 0, 1, -16))
+	mode = false
+end
+
+local function show_gui()
+	fish_fly_2:TweenPosition(UDim2.new(0, 0, 1, -200))
+	mode = true
+end
+
+local function check_gui()
+	if mode == false then
+		hide_gui()
+	else
+		show_gui()
+	end
+end
+
+local function check_player()
+	if toggled then
+		fly()
+		title.Text = "on"
+	else
+		unfly()
+		title.Text = "off"
+	end
+	
+	if animation_toggle then
+		title_2.Text = "on"
+	else
+		title_2.Text = "off"
+	end
+	
+	humanoid.WalkSpeed = tonumber(walkspeed) or 16
+end
+
+toggle_2.MouseButton1Click:Connect(function()
+	toggled = not toggled
+	check_player()
+end)
+
+input.Changed:Connect(function()
+	walkspeed = input.Text
+	check_player()
+end)
+
+toggle_3.MouseButton1Click:Connect(function()
+	animation_toggle = not animation_toggle
+	check_player()
+end)
+
+minimize.MouseButton1Click:Connect(function()
+	mode = not mode
+	check_gui()
+end)
